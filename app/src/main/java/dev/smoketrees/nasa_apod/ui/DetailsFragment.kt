@@ -5,13 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import dev.smoketrees.nasa_apod.adapters.DetailsItemAdapter
 import dev.smoketrees.nasa_apod.databinding.FragmentDetailsBinding
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
     private val args: DetailsFragmentArgs by navArgs()
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +30,11 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rendum.text = args.position.toString()
+        val detailsItemAdapter = DetailsItemAdapter(viewModel.apodItems)
+        binding.pager.apply {
+            adapter = detailsItemAdapter
+            setCurrentItem(args.position, false)
+        }
     }
 
     override fun onDestroy() {
