@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 import dev.smoketrees.nasa_apod.adapters.DetailsItemAdapter
 import dev.smoketrees.nasa_apod.databinding.FragmentDetailsBinding
 

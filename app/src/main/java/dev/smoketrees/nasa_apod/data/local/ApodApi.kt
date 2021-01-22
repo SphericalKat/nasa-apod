@@ -8,7 +8,7 @@ import dev.smoketrees.nasa_apod.data.model.ApodItem
 import javax.inject.Inject
 
 class ApodApi @Inject constructor(
-    @ApplicationContext private val  context: Context,
+    @ApplicationContext private val context: Context,
     private val jsonAdapter: JsonAdapter<List<ApodItem>>
 ) {
     fun getApodItems(): List<ApodItem> {
