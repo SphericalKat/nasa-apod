@@ -13,6 +13,7 @@
         android:paddingBottom="12dp"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/apod_item"
+        android:clipToPadding="false"
         tools:orientation="vertical"
         tools:spanCount="2" />
 
