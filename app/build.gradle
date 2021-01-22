@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "dev.smoketrees.nasa_apod"
-        minSdkVersion 25
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -59,4 +59,9 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.2"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.2"
+
+    // JSON deserialization
+    implementation "com.squareup.moshi:moshi:1.11.0"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.11.0"
+
 }
