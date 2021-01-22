@@ -9,7 +9,10 @@
         android:id="@+id/main_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/apod_item"
         tools:orientation="vertical"
         tools:spanCount="2" />
 

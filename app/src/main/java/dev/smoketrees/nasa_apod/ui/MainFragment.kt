@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import dev.smoketrees.nasa_apod.R
+import dev.smoketrees.nasa_apod.adapters.ApodItemAdapter
 import dev.smoketrees.nasa_apod.databinding.MainFragmentBinding
 
 @AndroidEntryPoint
@@ -22,6 +24,16 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val apodAdapter = ApodItemAdapter(viewModel.apodItems)
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+        binding.mainRecyclerView.apply {
+            adapter = apodAdapter
+            layoutManager = gridLayoutManager
+        }
     }
 
     override fun onDestroyView() {
