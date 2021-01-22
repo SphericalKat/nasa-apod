@@ -10,12 +10,13 @@ import dev.smoketrees.nasa_apod.data.model.ApodItem
 import dev.smoketrees.nasa_apod.databinding.ApodItemBinding
 
 class ApodItemAdapter(
-    private val items: List<ApodItem>
+    private val items: List<ApodItem>,
+    private val onClick: (Int) -> Unit,
 ) : RecyclerView.Adapter<ApodItemAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ApodItemBinding.inflate(LayoutInflater.from(parent.context))
-        return ViewHolder(binding)
+        return ViewHolder(binding, onClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -25,7 +26,8 @@ class ApodItemAdapter(
     override fun getItemCount() = items.size
 
     class ViewHolder(
-        private val binding: ApodItemBinding
+        private val binding: ApodItemBinding,
+        private val onClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int, item: ApodItem) {
             binding.apodTitle.text = item.title
@@ -42,6 +44,8 @@ class ApodItemAdapter(
                 .load(item.url)
                 .placeholder(circularProgressDrawable)
                 .into(binding.apodImage)
+
+            itemView.setOnClickListener { onClick(position) }
         }
     }
 }
