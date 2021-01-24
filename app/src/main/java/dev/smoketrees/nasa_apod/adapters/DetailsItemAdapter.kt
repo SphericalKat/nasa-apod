@@ -1,12 +1,13 @@
 package dev.smoketrees.nasa_apod.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import dev.smoketrees.nasa_apod.R
 import dev.smoketrees.nasa_apod.data.model.ApodItem
 import dev.smoketrees.nasa_apod.databinding.DetailsItemBinding
 
@@ -38,7 +39,12 @@ class DetailsItemAdapter(
                 explanation.text = item.explanation
                 val circularProgressDrawable = CircularProgressDrawable(itemView.context)
                 circularProgressDrawable.apply {
-                    setColorSchemeColors(Color.rgb(105, 240, 174))
+                    setColorSchemeColors(
+                        ContextCompat.getColor(
+                            itemView.context,
+                            R.color.neon_green
+                        )
+                    )
                     strokeWidth = 10f
                     centerRadius = 40f
                     start()
