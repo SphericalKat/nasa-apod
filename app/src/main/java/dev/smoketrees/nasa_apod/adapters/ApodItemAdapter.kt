@@ -30,22 +30,24 @@ class ApodItemAdapter(
         private val onClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int, item: ApodItem) {
-            binding.apodTitle.text = item.title
+            binding.apply {
+                apodTitle.text = item.title
 
-            val circularProgressDrawable = CircularProgressDrawable(itemView.context)
-            circularProgressDrawable.apply {
-                setColorSchemeColors(Color.rgb(105, 240, 174))
-                strokeWidth = 10f
-                centerRadius = 40f
-                start()
+                val circularProgressDrawable = CircularProgressDrawable(itemView.context)
+                circularProgressDrawable.apply {
+                    setColorSchemeColors(Color.rgb(105, 240, 174))
+                    strokeWidth = 10f
+                    centerRadius = 40f
+                    start()
+                }
+
+                Glide.with(itemView)
+                    .load(item.url)
+                    .placeholder(circularProgressDrawable)
+                    .into(apodImage)
+
+                containerCard.setOnClickListener { onClick(position) }
             }
-
-            Glide.with(itemView)
-                .load(item.url)
-                .placeholder(circularProgressDrawable)
-                .into(binding.apodImage)
-
-            itemView.setOnClickListener { onClick(position) }
         }
     }
 }
