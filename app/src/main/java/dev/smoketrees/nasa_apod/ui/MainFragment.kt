@@ -37,7 +37,7 @@ class MainFragment : Fragment() {
             )
         }, { pos ->
             val newItems = viewModel.apodItems.value!!
-            newItems[pos].isFavorite = !newItems[pos].isFavorite
+            newItems[pos].isFavorite = newItems[pos].isFavorite?.not() ?: true
             viewModel.apodItems.postValue(newItems)
 
         })

@@ -29,7 +29,7 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val detailsItemAdapter = DetailsItemAdapter(viewModel.apodItems)
+        val detailsItemAdapter = DetailsItemAdapter(viewModel.apodItems.value!!)
         binding.pager.apply {
             adapter = detailsItemAdapter
             setCurrentItem(args.position, false)

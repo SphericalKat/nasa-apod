@@ -19,5 +19,5 @@ data class ApodItem(
     val serviceVersion: String,
     val title: String,
     val url: String,
-    var isFavorite: Boolean
+    var isFavorite: Boolean?
 ) : java.io.Serializable

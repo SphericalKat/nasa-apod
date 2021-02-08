@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import dev.smoketrees.nasa_apod.R
 import dev.smoketrees.nasa_apod.data.model.ApodItem
 import dev.smoketrees.nasa_apod.databinding.ApodItemBinding
 
@@ -50,6 +51,12 @@ class ApodItemAdapter(
                 }
 
                 binding.favButton.setOnClickListener { onFavClick(position) }
+
+                if (item.isFavorite == true) {
+                    binding.favButton.setImageResource(R.drawable.ic_star_filled)
+                } else {
+                    binding.favButton.setImageResource(R.drawable.ic_star_outline)
+                }
 
                 Glide.with(itemView)
                     .load(item.url)
