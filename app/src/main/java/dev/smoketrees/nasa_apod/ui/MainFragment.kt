@@ -28,13 +28,15 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val apodAdapter = ApodItemAdapter(viewModel.apodItems) { pos ->
+        val apodAdapter = ApodItemAdapter(viewModel.apodItems, { pos ->
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDetailsFragment(
                     pos
                 )
             )
-        }
+        }, { pos ->
+            viewModel.apodItems[pos].isFavorite = !viewModel.apodItems[pos].isFavorite
+        })
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.mainRecyclerView.apply {
             adapter = apodAdapter

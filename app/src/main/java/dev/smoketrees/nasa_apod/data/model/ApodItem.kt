@@ -18,5 +18,6 @@ data class ApodItem(
     @Json(name = "service_version")
     val serviceVersion: String,
     val title: String,
-    val url: String
+    val url: String,
+    var isFavorite: Boolean
 ) : java.io.Serializable

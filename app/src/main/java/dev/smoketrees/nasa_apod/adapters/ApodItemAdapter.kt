@@ -12,11 +12,12 @@ import dev.smoketrees.nasa_apod.databinding.ApodItemBinding
 class ApodItemAdapter(
     private val items: List<ApodItem>,
     private val onClick: (Int) -> Unit,
+    private val onFavClick: (Int) -> Unit
 ) : RecyclerView.Adapter<ApodItemAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ApodItemBinding.inflate(LayoutInflater.from(parent.context))
-        return ViewHolder(binding, onClick)
+        return ViewHolder(binding, onClick, onFavClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,7 +28,8 @@ class ApodItemAdapter(
 
     class ViewHolder(
         private val binding: ApodItemBinding,
-        private val onClick: (Int) -> Unit
+        private val onClick: (Int) -> Unit,
+        private val onFavClick: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int, item: ApodItem) {
             binding.apply {
@@ -40,6 +42,8 @@ class ApodItemAdapter(
                     centerRadius = 40f
                     start()
                 }
+
+                binding.favButton.setOnClickListener { onFavClick(position) }
 
                 Glide.with(itemView)
                     .load(item.url)
