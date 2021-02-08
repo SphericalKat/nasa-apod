@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,15 +29,23 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val apodAdapter = ApodItemAdapter(viewModel.apodItems, { pos ->
+        val apodAdapter = ApodItemAdapter(mutableListOf(), { pos ->
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDetailsFragment(
                     pos
                 )
             )
         }, { pos ->
-            viewModel.apodItems[pos].isFavorite = !viewModel.apodItems[pos].isFavorite
+            val newItems = viewModel.apodItems.value!!
+            newItems[pos].isFavorite = !newItems[pos].isFavorite
+            viewModel.apodItems.postValue(newItems)
+
         })
+
+        viewModel.apodItems.observe(viewLifecycleOwner, {
+            apodAdapter.updateItems(it)
+        })
+
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.mainRecyclerView.apply {
             adapter = apodAdapter

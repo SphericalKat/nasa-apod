@@ -10,7 +10,7 @@ import dev.smoketrees.nasa_apod.data.model.ApodItem
 import dev.smoketrees.nasa_apod.databinding.ApodItemBinding
 
 class ApodItemAdapter(
-    private val items: List<ApodItem>,
+    private var items: MutableList<ApodItem>,
     private val onClick: (Int) -> Unit,
     private val onFavClick: (Int) -> Unit
 ) : RecyclerView.Adapter<ApodItemAdapter.ViewHolder>() {
@@ -25,6 +25,12 @@ class ApodItemAdapter(
     }
 
     override fun getItemCount() = items.size
+
+    fun updateItems(newItems: List<ApodItem>) {
+        items.clear()
+        items.addAll(newItems)
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(
         private val binding: ApodItemBinding,
